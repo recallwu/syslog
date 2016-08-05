@@ -1,0 +1,21 @@
+<component name="ArtifactManager">
+  <artifact name="syslog:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/syslog_jar</output-path>
+    <root id="root">
+      <element id="archive" name="syslog.jar">
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/src/resources/META-INF/MANIFEST.MF" />
+        </element>
+        <element id="module-output" name="syslog" />
+      </element>
+      <element id="directory" name="lib">
+        <element id="library" level="project" name="ojdbc6_g" />
+      </element>
+      <element id="directory" name="conf">
+        <element id="file-copy" path="$PROJECT_DIR$/conf/config.properties" />
+        <element id="file-copy" path="$PROJECT_DIR$/conf/facility_module.properties" />
+        <element id="file-copy" path="$PROJECT_DIR$/conf/read_location.properties" />
+      </element>
+    </root>
+  </artifact>
+</component>
