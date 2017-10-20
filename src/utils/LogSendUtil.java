@@ -3,7 +3,6 @@ package utils;
 import java.io.IOException;
 import java.net.*;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -88,28 +87,28 @@ public class LogSendUtil {
         int idx;
         byte[] data;
         byte[] sBytes;
-        String nmObj;
+        // String nmObj;
         String strObj;
 
         pricode = computeCode(fac, pri);
         Integer priObj = new Integer(pricode);
 
-        nmObj = new String(Thread.currentThread().getName());
+        // nmObj = new String(Thread.currentThread().getName());
 
-        length = 4 + nmObj.getBytes().length + msg.getBytes().length + 1;
-        length += (pricode > 99) ? 3 : ((pricode > 9) ? 2 : 1);
+        length = 4 /*+ nmObj.getBytes().length*/ + msg.getBytes().length;
+        // length += (pricode > 99) ? 3 : ((pricode > 9) ? 2 : 1);
 
-        String dStr = null;
-        if (this.includeDate) {
-            // See note above on why we have two formats...
-            Calendar now = Calendar.getInstance();
-            if (now.get(Calendar.DAY_OF_MONTH) < 10)
-                dStr = this.date1Format.format(now.getTime());
-            else
-                dStr = this.date2Format.format(now.getTime());
-
-            length += dStr.getBytes().length;
-        }
+        // String dStr = null;
+        // if (this.includeDate) {
+        //     // See note above on why we have two formats...
+        //     Calendar now = Calendar.getInstance();
+        //     if (now.get(Calendar.DAY_OF_MONTH) < 10)
+        //         dStr = this.date1Format.format(now.getTime());
+        //     else
+        //         dStr = this.date2Format.format(now.getTime());
+        //
+        //     length += dStr.getBytes().length;
+        // }
 
         data = new byte[length];
 
@@ -123,25 +122,26 @@ public class LogSendUtil {
 
         data[idx++] = '>';
 
-        if (this.includeDate) {
-            sBytes = dStr.getBytes();
-            System.arraycopy(sBytes, 0, data, idx, sBytes.length);
-            idx += sBytes.length;
-        }
+        // if (this.includeDate) {
+        //     sBytes = dStr.getBytes();
+        //     System.arraycopy(sBytes, 0, data, idx, sBytes.length);
+        //     idx += sBytes.length;
+        // }
 
-        sBytes = nmObj.getBytes();
-        System.arraycopy(sBytes, 0, data, idx, sBytes.length);
-        idx += sBytes.length;
-
-        data[idx++] = ':';
-        data[idx++] = ' ';
+        // sBytes = nmObj.getBytes();
+        // System.arraycopy(sBytes, 0, data, idx, sBytes.length);
+        // idx += sBytes.length;
+        //
+        // data[idx++] = ':';
+        // data[idx++] = ' ';
 
         sBytes = msg.getBytes();
         System.arraycopy(sBytes, 0, data, idx, sBytes.length);
-        idx += sBytes.length;
+        // idx += sBytes.length;
 
-        data[idx] = 0;
-
+        // data[idx] = 0;
+        String dataStr = new String(data);
+        System.out.println(dataStr);
         DatagramPacket packet = new DatagramPacket(data, length, addr, port);
 
         try {

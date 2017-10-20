@@ -27,7 +27,18 @@ public class LogSend {
 
             for (int i=0;i<list.size();i++) {
                 LogInfo logInfo = LogHandle.instance().handleLog(list.get(i));
-                LogSendUtil.instance().syslog(logInfo.getFacility(),logInfo.getSeverity(),logInfo.getMsg());
+
+                // Integer facility = logInfo.getFacility();
+                // Integer severity = logInfo.getSeverity();
+                String msg = logInfo.getMsg();
+
+                LogSendUtil.instance().syslog(1, 5, msg);
+                /*if (facility != null && severity != null && msg != null) {
+                    LogSendUtil.instance().syslog(1, 5, msg);
+                } else {
+                    System.out.println("facility: " + facility + " , severity: " + severity + " ,msg: " + msg);
+                }*/
+
                 if(i==list.size()-1){
                     ReadLocationProUtil.instance().setValue("read_location",list.get(i).getId().toString());
                     endId = list.get(i).getId();

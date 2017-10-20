@@ -41,12 +41,17 @@ public class LogHandle {
         msg.append("\";Sip=\"");
         msg.append(sip);
         msg.append("\";OpType=\"");
-        msg.append(opType);
+        if("Login History".equals(opType)){
+            msg.append("Login");
+        }else{
+            msg.append(opType);
+        }
         msg.append("\";OpResult=\"");
         msg.append(opResult);
         msg.append("\";OpText=\"");
         msg.append(opText);
-        msg.append("\";");
+        // msg.append("\";");
+        msg.append("\"");
 
         Integer facilityValue = getFacilityValue(sysinfo.getApp());
         Integer severityValue = getSeverityValue(sysinfo.getAct(),sysinfo.getStatus());
